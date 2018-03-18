@@ -44,69 +44,72 @@ public class MainActivity extends AppCompatActivity {
 
 
     private Gson gson = new Gson();
-    CharacterApiManager  characterApiManager = new CharacterApiManager();
+    CharacterApiManager characterApiManager = new CharacterApiManager();
     FilmApiManager fam = new FilmApiManager();
-    private TextView hero ;
-    private TextView year ;
+    private TextView hero;
+    private TextView year;
     private ImageView hero_pic;
     Calendar cal = Calendar.getInstance();
     private int day = cal.get(Calendar.DAY_OF_MONTH);
-    private RecyclerView recyclerView ;
-    private Adapter mAdapter ;
-   // private RecyclerView recyclerView ;
+    private RecyclerView recyclerView;
+    private Adapter mAdapter;
+    // private RecyclerView recyclerView ;
     //  private MyAdapter adapter ;
-  //  private RecyclerView.LayoutManager layoutManager ;
-  //  private List<ListItem> list = new ArrayList<ListItem>();
-    private RequestQueue rq ;
-    private String url = "https://swapi.co/api/people/"+day ;
-    private String sthero ;
-    private String stplanet ;
-    private String path = "R.drawable.img13" ;
-    private List<HeroInfo> list ;
-    private List<Films> films ;
+    //  private RecyclerView.LayoutManager layoutManager ;
+    //  private List<ListItem> list = new ArrayList<ListItem>();
+    private RequestQueue rq;
+    private String url = "https://swapi.co/api/people/" + day;
+    private String sthero;
+    private String stplanet;
+    private String path = "R.drawable.img13";
+    private List<HeroInfo> list;
+    private List<Films> films = new ArrayList<Films>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        year = (TextView) findViewById(R.id.birth_year);
+        hero = (TextView) findViewById(R.id.hero_name);
 
-        recyclerView = (RecyclerView) findViewById(R.id.films_list);
-        mAdapter = new Adapter(films);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+//        recyclerView = (RecyclerView) findViewById(R.id.films_list);
+//        mAdapter = new Adapter(films);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        recyclerView.setAdapter(mAdapter);
+//        mAdapter.notifyDataSetChanged();
 
-for (int i=1; i<8;i++) //episode 8 isn't added in the api
-{
-
-    fam.getFilmAtEpisode(i).enqueue(new retrofit2.Callback<Films>() {
-
-        @Override
-        public void onResponse(retrofit2.Call<Films> call, retrofit2.Response<Films> response) {
-            if(response.isSuccessful()){
-                Films film = response.body();
-                films.add(film);
-
-
-            }
-        }
-
-        @Override
-        public void onFailure(retrofit2.Call<Films> call, Throwable t) {
-
-        }
-
-
-    });
-
-
-
-}
+//for (int i=1; i<8;i++) //episode 8 isn't added in the api
+//{
+//
+//    fam.getFilmAtEpisode(i).enqueue(new retrofit2.Callback<Films>() {
+//
+//        @Override
+//        public void onResponse(retrofit2.Call<Films> call, retrofit2.Response<Films> response) {
+//            if(response.isSuccessful()){
+//                Films film = response.body();
+//                films.add(film);
+//
+//
+//            }
+//        }
+//
+//        @Override
+//        public void onFailure(retrofit2.Call<Films> call, Throwable t) {
+//
+//        }
+//
+//
+//    });
+//
+//
+//
+//}
         characterApiManager.getHeroAtDay(day).enqueue(new retrofit2.Callback<HeroInfo>() {
             @Override
             public void onResponse(retrofit2.Call<HeroInfo> call, retrofit2.Response<HeroInfo> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     HeroInfo heroInfo = response.body();
                     hero.setText(heroInfo.getName());
                     year.setText(heroInfo.getBirthYear());
@@ -119,20 +122,20 @@ for (int i=1; i<8;i++) //episode 8 isn't added in the api
 
             }
         });
-//
+
 //        rq = Volley.newRequestQueue(this);
-        hero = (TextView) findViewById(R.id.hero_name);
+
 //
 //
 //
-        year =(TextView) findViewById(R.id.birth_year);
-        hero_pic = (ImageView)findViewById(R.id.hero_icon);
+
+        hero_pic = (ImageView) findViewById(R.id.hero_icon);
 //        Picasso.with(this).load("R.drawable.img"+day).into(hero_pic);
-//        int id = getResources().getIdentifier("img"+day,"drawable",getPackageName());
-//        if(id != 0){
-//            hero_pic.setImageResource(id);
+        int id = getResources().getIdentifier("img" + day, "drawable", getPackageName());
+        if (id != 0) {
+            hero_pic.setImageResource(id);
 //         Picasso.with(this).load(id);
-//        }
+       }
 //
 //        Toasty.info(this, "Happy "+sthero+" day!", Toast.LENGTH_LONG, true).show();
 //
@@ -171,5 +174,7 @@ for (int i=1; i<8;i++) //episode 8 isn't added in the api
 //
 //
 //        rq.add(jor);
+
+        }
     }
-}
+
