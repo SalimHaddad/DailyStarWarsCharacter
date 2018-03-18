@@ -72,40 +72,40 @@ public class MainActivity extends AppCompatActivity {
         year = (TextView) findViewById(R.id.birth_year);
         hero = (TextView) findViewById(R.id.hero_name);
 
-//        recyclerView = (RecyclerView) findViewById(R.id.films_list);
-//        mAdapter = new Adapter(films);
-//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-//        recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        recyclerView.setAdapter(mAdapter);
-//        mAdapter.notifyDataSetChanged();
+        recyclerView = (RecyclerView) findViewById(R.id.films_list);
+        mAdapter = new Adapter(films);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        mAdapter.notifyDataSetChanged();
 
-//for (int i=1; i<8;i++) //episode 8 isn't added in the api
-//{
-//
-//    fam.getFilmAtEpisode(i).enqueue(new retrofit2.Callback<Films>() {
-//
-//        @Override
-//        public void onResponse(retrofit2.Call<Films> call, retrofit2.Response<Films> response) {
-//            if(response.isSuccessful()){
-//                Films film = response.body();
-//                films.add(film);
-//
-//
-//            }
-//        }
-//
-//        @Override
-//        public void onFailure(retrofit2.Call<Films> call, Throwable t) {
-//
-//        }
-//
-//
-//    });
-//
-//
-//
-//}
+for (int i=1; i<8;i++) //episode 8 isn't added in the api
+{
+
+    fam.getFilmAtEpisode(i).enqueue(new retrofit2.Callback<Films>() {
+
+        @Override
+        public void onResponse(retrofit2.Call<Films> call, retrofit2.Response<Films> response) {
+            if(response.isSuccessful()){
+                Films film = response.body();
+                films.add(film);
+
+
+            }
+        }
+
+        @Override
+        public void onFailure(retrofit2.Call<Films> call, Throwable t) {
+
+        }
+
+
+    });
+
+
+
+}
         characterApiManager.getHeroAtDay(day).enqueue(new retrofit2.Callback<HeroInfo>() {
             @Override
             public void onResponse(retrofit2.Call<HeroInfo> call, retrofit2.Response<HeroInfo> response) {
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         int id = getResources().getIdentifier("img" + day, "drawable", getPackageName());
         if (id != 0) {
             hero_pic.setImageResource(id);
-//         Picasso.with(this).load(id);
+     //       Picasso.with(this).load(id);
        }
 //
 //        Toasty.info(this, "Happy "+sthero+" day!", Toast.LENGTH_LONG, true).show();
